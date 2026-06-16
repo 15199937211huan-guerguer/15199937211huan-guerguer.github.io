@@ -29,10 +29,25 @@ export function useSmoothScroll(enabled = true) {
       if (!target) return;
       const id = target.getAttribute("href");
       if (!id || id === "#") return;
-      const el = document.querySelector(id);
+      const el = document.querySelector(id) as HTMLElement | null;
       if (!el) return;
       e.preventDefault();
-      lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.4 });
+      const trigger = target;
+
+      lenis.scrollTo(el, {
+        offset: -80,
+        duration: 0.15,
+        onComplete: () => {
+          trigger.classList.remove("arrive-flash");
+          void trigger.offsetWidth;
+          trigger.classList.add("arrive-flash");
+          const clear = () => {
+            trigger.classList.remove("arrive-flash");
+            trigger.removeEventListener("animationend", clear);
+          };
+          trigger.addEventListener("animationend", clear);
+        },
+      });
     };
 
     document.addEventListener("click", onClick);

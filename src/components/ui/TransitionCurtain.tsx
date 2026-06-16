@@ -13,8 +13,9 @@ export function TransitionCurtain() {
       const id = target.getAttribute("href");
       if (!id || id === "#") return;
       if (!document.querySelector(id)) return;
-      setActive(true);
-      window.setTimeout(() => setActive(false), 720);
+      setActive(false);
+      requestAnimationFrame(() => setActive(true));
+      window.setTimeout(() => setActive(false), 480);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
@@ -24,23 +25,15 @@ export function TransitionCurtain() {
     <AnimatePresence>
       {active && (
         <motion.div
-          className="pointer-events-none fixed inset-0 z-[80] origin-bottom bg-ink-950"
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: 1, originY: 0 }}
-          exit={{ scaleY: 0, originY: 1 }}
-          transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-        >
-          <div className="flex h-full items-center justify-center">
-            <motion.span
-              className="font-mono text-sm tracking-[0.4em] text-accent/70"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              [= ◇ ⌒ ◇ =]
-            </motion.span>
-          </div>
-        </motion.div>
+          className="pointer-events-none fixed inset-x-0 top-0 z-[80] h-[2px] origin-left bg-gradient-to-r from-accent/0 via-accent to-accent/0"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            scaleX: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
+            opacity: { duration: 0.16 },
+          }}
+        />
       )}
     </AnimatePresence>
   );

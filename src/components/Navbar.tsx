@@ -9,6 +9,12 @@ export function Navbar() {
   const [active, setActive] = useState("#hero");
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const ulRef = useRef<HTMLUListElement | null>(null);
+  const [indicator, setIndicator] = useState({
+    left: 0,
+    width: 0,
+    visible: false,
+  });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -68,6 +74,31 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const ul = ulRef.current;
+    if (!ul) return;
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest(
+        'a[href^="#"]'
+      ) as HTMLAnchorElement | null;
+      if (!a || !ul.contains(a)) return;
+      const ulBox = ul.getBoundingClientRect();
+      const aBox = a.getBoundingClientRect();
+      setIndicator({
+        left: aBox.left - ulBox.left,
+        width: aBox.width,
+        visible: true,
+      });
+      window.clearTimeout((onClick as any)._t);
+      (onClick as any)._t = window.setTimeout(
+        () => setIndicator((s) => ({ ...s, visible: false })),
+        650
+      );
+    };
+    ul.addEventListener("click", onClick);
+    return () => ul.removeEventListener("click", onClick);
+  }, []);
+
   return (
     <header className="fixed inset-x-0 top-0 z-40">
       <nav className="shell flex h-20 items-center justify-between">
@@ -89,17 +120,32 @@ export function Navbar() {
         </a>
 
         <ul
+          ref={ulRef}
           className={cn(
-            "hidden items-center gap-1 rounded-full border px-2 py-1.5 transition-all duration-500 md:flex",
+            "relative hidden items-center gap-1 rounded-full border px-2 py-1.5 transition-all duration-500 md:flex",
             scrolled
               ? "border-white/10 bg-ink-900/70 backdrop-blur-xl"
               : "border-white/8 bg-ink-900/40 backdrop-blur-md"
           )}
         >
+          <span
+            aria-hidden
+            className={cn(
+              "pointer-events-none absolute top-1/2 z-0 -translate-y-1/2 rounded-full bg-accent/15 ring-1 ring-accent/40 shadow-[0_0_18px_rgba(94,234,212,0.45)]",
+              indicator.visible
+                ? "opacity-100 transition-[left,width,opacity] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                : "opacity-0 transition-opacity duration-300"
+            )}
+            style={{
+              left: indicator.left,
+              width: indicator.width,
+              height: "calc(100% - 0.5rem)",
+            }}
+          />
           {navLinks.map((link) => {
             const isActive = active === link.href;
             return (
-              <li key={link.href}>
+              <li key={link.href} className="relative z-10">
                 <a
                   href={link.href}
                   className={cn(

@@ -4,6 +4,7 @@ import { Mail, MapPin } from "lucide-react";
 import { profile, intro, stats, keywords, obsessions } from "@/data/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatCounter } from "@/components/ui/StatCounter";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function About() {
   const [active, setActive] = useState(0);
@@ -89,14 +90,11 @@ export function About() {
 
           {/* Intro */}
           <div className="lg:col-span-7">
-            <Reveal>
-              <span className="eyebrow">About · 关于我</span>
-              <h2 className="mt-5 font-display text-4xl font-semibold tracking-tightest text-fg lg:text-5xl">
-                对 AI 能力好奇
-                <br />
-                也对它怎么服务人好奇
-              </h2>
-            </Reveal>
+            <SectionHeading
+              eyebrow="About · 关于我"
+              title="对 AI 能力好奇 也对它怎么服务人好奇"
+              index="01"
+            />
 
             <div className="mt-8 space-y-5">
               {intro.paragraphs.map((p, i) => (
