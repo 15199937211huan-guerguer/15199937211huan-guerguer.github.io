@@ -9,9 +9,9 @@ export function Life() {
       <div className="shell">
         <SectionHeading
           eyebrow="Beyond Work · 生活"
-          title="不只有工作和项目的人"
+          title="生活中的我"
           description="志愿者、分享、黑客松、徒步旅行……这些经历并非为了丰富简历，而是我保持开放视角、保持对真实世界感知力的方式。"
-          index="08"
+          index="06"
         />
 
         <Reveal delay={0.1}>

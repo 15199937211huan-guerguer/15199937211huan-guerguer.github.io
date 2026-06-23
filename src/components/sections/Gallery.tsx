@@ -213,7 +213,7 @@ export function Gallery() {
           eyebrow="Moments · 影像志"
           title="走过的路，见过的人"
           description="徒步、毕业、分享、志愿、旅途……影像围成一颗缓缓旋转的星球，这是一张关于我大学的真实世界的地图。"
-          index="09"
+          index="07"
         />
 
         <div

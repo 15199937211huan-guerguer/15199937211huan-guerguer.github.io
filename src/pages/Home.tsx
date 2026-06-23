@@ -6,8 +6,6 @@ import { Experience } from "@/components/sections/Experience";
 import { Academic } from "@/components/sections/Academic";
 import { Projects } from "@/components/sections/Projects";
 import { Strengths } from "@/components/sections/Strengths";
-import { Approach } from "@/components/sections/Approach";
-import { Focus } from "@/components/sections/Focus";
 import { Life } from "@/components/sections/Life";
 import { Gallery } from "@/components/sections/Gallery";
 import { Contact } from "@/components/sections/Contact";
@@ -40,9 +38,6 @@ export default function Home() {
         <Projects />
         <VideoBreak {...videoBreaks.work} />
         <Strengths />
-        <Approach />
-        <Focus />
-        <VideoBreak {...videoBreaks.life} />
         <Life />
         <Gallery />
         <Contact />

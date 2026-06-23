@@ -81,17 +81,45 @@ export function Experience() {
                     {exp.summary}
                   </p>
 
-                  <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
-                    {exp.highlights.map((h) => (
-                      <li
-                        key={h}
-                        className="flex gap-3 text-sm leading-relaxed text-fg-muted"
-                      >
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" />
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
+                  {exp.highlightGroups ? (
+                    <div className="mt-6 space-y-6">
+                      {exp.highlightGroups.map((group) => (
+                        <div key={group.heading}>
+                          <h4 className="font-display text-sm font-semibold tracking-tight text-accent/90">
+                            {group.heading}
+                          </h4>
+                          <ul className="mt-3 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
+                            {group.items.map((item) => (
+                              <li
+                                key={item.title}
+                                className="flex gap-3 text-sm leading-relaxed text-fg-muted"
+                              >
+                                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" />
+                                <span>
+                                  <span className="font-medium text-fg">
+                                    {item.title}
+                                  </span>
+                                  ——{item.detail}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="mt-6 grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
+                      {exp.highlights?.map((h) => (
+                        <li
+                          key={h}
+                          className="flex gap-3 text-sm leading-relaxed text-fg-muted"
+                        >
+                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" />
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
                   {exp.metrics && (
                     <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/8 pt-7 sm:grid-cols-4">

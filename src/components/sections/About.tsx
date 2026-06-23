@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
-import { profile, intro, stats, keywords, obsessions } from "@/data/content";
+import { profile, intro, stats } from "@/data/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -128,62 +128,6 @@ export function About() {
                 ))}
               </div>
             </Reveal>
-          </div>
-        </div>
-
-        {/* Keywords */}
-        <div className="mt-20">
-          <Reveal>
-            <span className="eyebrow">Keywords · 几个关键词</span>
-          </Reveal>
-          <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/8 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
-            {keywords.map((kw, i) => {
-              const Icon = kw.icon;
-              return (
-                <Reveal key={kw.title} delay={(i % 3) * 0.08}>
-                  <div className="group h-full bg-ink-850 p-7 transition-colors duration-500 hover:bg-ink-800">
-                    <div className="flex items-center gap-3.5">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-ink-900 text-accent transition-all duration-500 group-hover:border-accent/40">
-                        <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
-                      </div>
-                      <h3 className="font-display text-base font-semibold tracking-tight text-fg">
-                        {kw.title}
-                      </h3>
-                    </div>
-                    <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-                      {kw.description}
-                    </p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Obsessions */}
-        <div className="mt-20">
-          <Reveal>
-            <span className="eyebrow">Obsessions · 驱动我的三个执念</span>
-            <h3 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tightest text-fg lg:text-4xl">
-              这三件事驱动了过去几年所有的选择
-            </h3>
-          </Reveal>
-          <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
-            {obsessions.map((ob, i) => (
-              <Reveal key={ob.index} delay={(i % 3) * 0.1}>
-                <div className="relative h-full rounded-xl border border-white/8 bg-ink-850 p-8 transition-all duration-500 hover:border-accent/30">
-                  <span className="font-display text-5xl font-bold tracking-tight text-accent/20">
-                    {ob.index}
-                  </span>
-                  <h4 className="mt-4 font-display text-xl font-semibold tracking-tight text-fg">
-                    {ob.title}
-                  </h4>
-                  <p className="mt-4 text-sm leading-relaxed text-fg-muted">
-                    {ob.description}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </div>

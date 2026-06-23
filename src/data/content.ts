@@ -1,22 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Sparkles,
-  Bot,
   LineChart,
-  Layers,
-  Workflow,
-  Users,
-  Brain,
-  Zap,
   Mic,
-  Briefcase,
-  Globe,
   Search,
-  Rocket,
   Gauge,
   Code2,
-  Database,
-  Palette,
   Mountain,
   HeartHandshake,
 } from "lucide-react";
@@ -38,7 +27,7 @@ export const profile = {
   heroMarquee: [
     "AI 视觉模型",
     "Agent 策略",
-    "Seedream 基模训练",
+    "Seedream训练数据建设",
     "Vibe Coding",
     "数据即设计语言",
     "Multi-Agent 评测",
@@ -66,64 +55,6 @@ export const intro = {
   ],
 };
 
-export type Keyword = { icon: LucideIcon; title: string; description: string };
-
-export const keywords: Keyword[] = [
-  {
-    icon: Brain,
-    title: "AI 视觉模型",
-    description: "当前在做的核心方向，覆盖基模训练和创作 Agent。",
-  },
-  {
-    icon: Bot,
-    title: "Agent & Skills",
-    description: "从策略设计到评估体系到自动化迭代，一直在做。",
-  },
-  {
-    icon: Zap,
-    title: "能自己做出来",
-    description: "Vibe Coding，搭过平台 / 工具 / 系统，验证想法不靠等。",
-  },
-  {
-    icon: Briefcase,
-    title: "5 段实习经历",
-    description: "字节、爱奇艺、华侨银行……不同场景下理解 AI 落地。",
-  },
-  {
-    icon: Mic,
-    title: "喜欢表达和连接",
-    description: "AI 科创讲师、黑客松、高校分享、校级活动组织者。",
-  },
-  {
-    icon: Globe,
-    title: "持续探索",
-    description: "30+ 次志愿者、海燕社社长，喜欢徒步、爬山、旅游。",
-  },
-];
-
-export type Obsession = { index: string; title: string; description: string };
-
-export const obsessions: Obsession[] = [
-  {
-    index: "01",
-    title: "技术要变强",
-    description:
-      "人工智能专业出身，对模型能力迭代有好奇心。做 Seedream 基模训练时深入数据管线，弄清什么样的数据能让推理能力提升；搭评测平台时，思考如何让评测摆脱主观感觉。",
-  },
-  {
-    index: "02",
-    title: "要真的好用",
-    description:
-      "模型强只是起点，关键在于有人用、用得顺、能解决真实问题。做 Agent 策略的起点永远是用户在什么场景下需要它。一个产出没有在真实场景里被验证过，就还不算完成。",
-  },
-  {
-    index: "03",
-    title: "想到了就做",
-    description:
-      "评测流程低效，自己搭一个平台；数据处理太痛苦，写一个工具集；知识管理不好，做一个 RAG 系统。不是等别人来做的人——问题足够清晰，就先自己动手验证一版。",
-  },
-];
-
 export type Stat = { value: number; prefix?: string; suffix: string; label: string };
 
 export const stats: Stat[] = [
@@ -137,12 +68,16 @@ export const stats: Stat[] = [
 
 export type ExperienceMetric = { value: string; label: string };
 
+export type HighlightItem = { title: string; detail: string };
+export type HighlightGroup = { heading: string; items: HighlightItem[] };
+
 export type Experience = {
   company: string;
   period: string;
   role: string;
   summary: string;
-  highlights: string[];
+  highlights?: string[];
+  highlightGroups?: HighlightGroup[];
   metrics?: ExperienceMetric[];
   insight?: string;
 };
@@ -151,14 +86,40 @@ export const experiences: Experience[] = [
   {
     company: "字节跳动",
     period: "2025.11 — 至今",
-    role: "AI 视觉模型 · Seedream 基模训练 & 豆包创作 Agent",
+    role: "Seedream训练数据建设 & 豆包视觉创作 Agent",
     summary:
       "先在 Seedream 5.0 基模训练方向主导 Reasoning 链路体系从 0 到 1 建设，后转向豆包创作 Agent 的策略与能力设计——从给模型喂数据的人，变成设计 Agent 行为的人。",
-    highlights: [
-      "判断问题不在数据量而在数据结构，从任务拆解、思维过程显式化、中英文差异三维重新设计数据形态。",
-      "设计多模型协同架构workflow，完成 Prompt → Flow Engineering 升级。",
-      "基于 ReAct 架构设计 5 大 SP 模块，构建自我强化数据闭环。",
-      "设计Skill，提升创作场景的产物效果。",
+    highlightGroups: [
+      {
+        heading: "一、推理数据体系建设",
+        items: [
+          {
+            title: "搭建全链路数据生产管线",
+            detail:
+              "搭建覆盖理解-推理-反思-生成的复合型数据架构，落地 32 条多模态自动化管线，打通 Coze 至 MM 平台入库流程，累计产出 41.5w+ 中英文推理数据，补齐模型推理能力训练素材缺口。",
+          },
+          {
+            title: "优化数据标准与评测基准",
+            detail:
+              "从 Query、推理文本、图文等多维度重构数据规范，沉淀高密度标注标准，新增反思、CoT 定向管线提升数据多样性；搭建分层考点 Benchmark 与量化评测机制，精准定位模型空间、隐喻理解短板。",
+          },
+        ],
+      },
+      {
+        heading: "二、视觉创作 Agent 全栈设计",
+        items: [
+          {
+            title: "构建标准化 SFT/RL 训练体系",
+            detail:
+              "自研分层门控、清洗过滤类 SP，搭建 10w+ 高质量 SFT 数据集；设计多维度量化打分 SP，把主观对话评价转化为精准奖励指标，解决 Agent 行为不可控、奖励信号模糊问题。",
+          },
+          {
+            title: "落地产品化可复用 Skill 能力",
+            detail:
+              "针对用户复刻创作需求，搭建三大类「做同款」完整 Skill 方案，标准化参考图、元素替换、提示词复用流程，降低用户操作门槛，沉淀可长期复用的 Agent 工具能力。",
+          },
+        ],
+      },
     ],
     metrics: [
       { value: "41.5万+", label: "推理数据产出" },
@@ -175,10 +136,37 @@ export const experiences: Experience[] = [
     role: "AI Agent 产品优化 + 自动化工作流建设",
     summary:
       "在成熟复杂的系统上做精准手术：把「答不对」这个模糊问题拆成可定位、可量化的环节，建立 RAG 五层评估体系，端到端优化 Agent 问答、知识库与自动化监控。",
-    highlights: [
-      "Agent 问答优化：四阶段指令框架 + 8 个高频场景专属 Prompt 模板，准确率与满意度大幅提升。",
-      "RAG 知识库搭建：分块关联性元数据标识 + 全自动同步管道，覆盖率与同步效率质变。",
-      "自动化监控：四层架构网关监控 + Excel 资产校验工具，异常发现从小时级压缩到分钟级。",
+    highlightGroups: [
+      {
+        heading: "一、Agent 问答产品全链路优化",
+        items: [
+          {
+            title: "定位根因并统筹全流程",
+            detail:
+              "定位低准确率、高幻觉问题根因在于知识库与检索缺陷，统筹指标搭建、Prompt 优化、知识库重构、上线验证全流程。",
+          },
+          {
+            title: "搭建迭代闭环抑制幻觉",
+            detail:
+              "搭建分层 RAG 指标、标准化指令框架、文本切片策略与线上监控迭代闭环，有效抑制模型幻觉、提升回答质量与用户体验。",
+          },
+        ],
+      },
+      {
+        heading: "二、运维流程自动化落地",
+        items: [
+          {
+            title: "巡检核对全流程工程化",
+            detail:
+              "改造人工巡检核对模式，将知识同步、网关异常监控、资产核验全流程工程化，搭建自动化管线与定时监控调度机制。",
+          },
+          {
+            title: "自动化降本并提早预警",
+            detail:
+              "实现资产核对、知识库同步自动化，大幅减少人工操作，提早捕获流程异常。",
+          },
+        ],
+      },
     ],
     metrics: [
       { value: "65%→87%", label: "回复准确率" },
@@ -187,7 +175,7 @@ export const experiences: Experience[] = [
       { value: "2h→3min", label: "网关异常发现" },
     ],
     insight:
-      "将 Agent 和 RAG 视为一体化系统——先画清楚场景边界和决策树，再讨论用什么模型和参数。",
+      "数据驱动诊断 → 分层指标 → 针对性策略 → 工程落地 → 数据验证闭环。Agent 和 RAG 是一体化系统——知识库结构决定记忆可靠性，行为策略决定用户信任度。",
   },
   {
     company: "华侨银行",
@@ -235,8 +223,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Multi-Agent 评测与迭代闭环平台",
-    category: "Vibe Coding · 自研全栈",
-    year: "2025",
+    category: "✅已上线",
+    year: "2026",
     description:
       "从需求定义、架构设计到全部代码独立完成。Orchestrator 驱动 11 个 Agent 角色协同，覆盖构建→执行→评测→决策→修订全链路；首创三轴多模态评测体系与版本谱系自动回滚，把多人数小时的迭代压缩为全自动执行。v2.0 已打通 Skill + SP 两侧并上线。",
     tags: ["Multi-Agent", "自动化评测", "飞书协同"],
@@ -245,18 +233,18 @@ export const projects: Project[] = [
   },
   {
     title: "百宝箱 · 数据提效 Web 工具集",
-    category: "Vibe Coding · Web 平台",
-    year: "2024",
+    category: "✅已上线",
+    year: "2026",
     description:
       "基于火山方舟大模型 API 构建并发处理管线，集成 6+ 高频工具，覆盖团队日常 80% 以上数据处理场景。WebSocket 实时进度、敏感数据本地化处理，为多位非工程同学提供零代码入口，累计节约数百小时工时。",
-    tags: ["提效工具", "并发管线", "零代码"],
+    tags: ["提效工具", "并发管线", "操作简易"],
     image:
       "https://copilot-cn.bytedance.net/api/ide/v1/text_to_image?prompt=minimal%20toolbox%20web%20application%20concept%2C%20floating%20glass%20panels%20and%20modular%20tools%20in%20dark%20space%2C%20teal%20glow%20accents%2C%20clean%20futuristic%20product%20design%2C%20ultra%20detailed&image_size=landscape_4_3",
   },
   {
     title: "RAG + LangGraph 知识管理系统",
-    category: "Vibe Coding · 全栈架构",
-    year: "2024",
+    category: "⭕️已完成暂未上线",
+    year: "2025",
     description:
       "13 张数据表、五层微服务架构独立全栈实现。LangGraph 双模一体化同时支持企业级 RAG 与个人知识管理；BM25+kNN 混合检索 → RRF 融合 → BGE-Reranker 精排的四层漏斗，PKMS 侧实现从碎片收集到力导向图谱的全链路自动治理。",
     tags: ["RAG", "LangGraph", "混合检索"],
@@ -265,11 +253,11 @@ export const projects: Project[] = [
   },
   {
     title: "人生万象 · AI 人生决策导航",
-    category: "进行中 · 产品定义到视觉",
-    year: "2025",
+    category: "📈进行中",
+    year: "2026",
     description:
       "用 AI 帮年轻人把混乱的人生选择整理成一张可看、可探索的人生地图，核心理念是「陪你看路，不替你决定」。拆解真实问题、重构失败经历、提供真实参照、把大决定拆成今天能做的最小验证步骤。",
-    tags: ["产品定义", "视觉设计", "AI 应用"],
+    tags: ["人生推衍", "决策建议", "AI 应用"],
     image:
       "https://copilot-cn.bytedance.net/api/ide/v1/text_to_image?prompt=abstract%20life%20path%20map%20visualization%2C%20glowing%20winding%20roads%20and%20constellation%20points%20on%20dark%20gradient%20background%2C%20teal%20and%20warm%20light%2C%20poetic%20cinematic%2C%20ultra%20detailed&image_size=landscape_4_3",
   },
@@ -363,39 +351,21 @@ export const introWords: IntroWord[] = [
 export const strengths: Strength[] = [
   {
     icon: Sparkles,
-    title: "视觉&语言模型",
+    title: "独立闭环落地",
     description:
-      "从语言问答智能助手，到 Seedream 视觉模型训练的数据形态设计，再到推理 Benchmark 与效果策略——把数据当作一种设计语言，决定模型学到什么样的思维方式。",
-  },
-  {
-    icon: Bot,
-    title: "Agent 策略与评测体系",
-    description:
-      "从 ReAct 行为策略、SP 体系设计到拆考点量化评测，让 Agent 在清晰的场景边界内克制地调用合适的能力。",
-  },
-  {
-    icon: Workflow,
-    title: "Vibe Coding 自研落地",
-    description:
-      "评测平台、提效工具、RAG 系统——发现问题就自己动手做一版。不是等待被分配任务的人，问题足够清晰就先写代码验证。",
+      "掌握图文大模型原理，具备多模态数据设计能力，可完成底层推理数据、视觉 Agent 工作，涵盖标准制定、自动化管线搭建与分层评测体系搭建；累计产出几十万级训练数据，优化线上 Agent 核心指标。",
   },
   {
     icon: LineChart,
-    title: "数据驱动诊断",
+    title: "数据驱动增值",
     description:
-      "数据驱动诊断 → 分层因果指标 → 针对性策略 → 工程化落地 → 数据验证闭环。相信数据，也会找真实用户聊聊到底卡在哪。",
+      "精通 ReAct 行为策略设计，擅长划定场景边界、精准调度 Agent 工具能力，搭建「数据诊断 - 分层指标拆解 - 策略迭代 - 落地验证」完整闭环；将工作流程、提示词方案、评测逻辑标准化，沉淀自动化工具与成套 SOP 可复用资产，避免重复开发，持续缩短项目迭代周期、降低人力成本。",
   },
   {
-    icon: Layers,
-    title: "AI 专业底座",
+    icon: HeartHandshake,
+    title: "跨岗协同对齐",
     description:
-      "人工智能专业出身，理解模型能力边界与原理，能在技术与产品、数据与审美、算法与体验之间高效翻译。",
-  },
-  {
-    icon: Users,
-    title: "表达、连接与跨领域",
-    description:
-      "AI 科创讲师、黑客松、高校分享、30+ 次志愿服务。把一件事讲清楚、帮到别人，以及跨领域碰撞带来的开放视角。",
+      "将模糊需求拆解为可量化、可落地执行标准；能够区分底层模型缺陷与上层 Agent 交互问题，向不同岗位输出针对性反馈。前置对齐迭代目标，多管线同步推进仍可稳定把控项目节奏，有效减少需求返工。",
   },
 ];
 
@@ -403,64 +373,23 @@ export type Approach = { icon: LucideIcon; title: string; description: string };
 
 export const approaches: Approach[] = [
   {
+    icon: Code2,
+    title: "想到了就做，自己先验证一版",
+    description:
+      "评测流程低效就自己搭平台，数据处理太痛苦就写工具集，知识管理不好就做 RAG 系统。不是等被分配任务的人——问题足够清晰，就先写代码跑一版，让讨论从「要不要做」变成「这版哪里不对」。",
+  },
+  {
     icon: Search,
     title: "先拆问题，再想方案",
     description:
-      "遇到模糊或复杂的问题，第一反应不是给方案，而是先拆清楚：问题怎么出现的、谁受影响、现有做法是什么、卡在哪一步。Seedream 数据堆量没效果，正是拆清「缺的是结构不是数量」才找到方向。",
-  },
-  {
-    icon: Rocket,
-    title: "不确定时，先做一个小的",
-    description:
-      "不习惯等信息齐了才动手。更常见的是先搭一个最简版本跑起来，拿真实反馈再决定下一步。评测平台、百宝箱都是先解决一个最痛的场景，好用了再加功能。",
-  },
-  {
-    icon: Code2,
-    title: "能自己验证的事不等别人",
-    description:
-      "Vibe Coding 养成的习惯。一个想法说半天没人接、讨论没结论，我会先自己写一版跑起来——让讨论从「要不要做」变成「这个版本哪里不对」。",
+      "遇到模糊或复杂的问题，第一反应不是给方案，而是先拆清楚：问题怎么出现的、谁受影响、卡在哪一步。Seedream 数据堆量没效果，正是拆清「缺的是结构不是数量」才找到方向。不确定时，先做一个最小版本跑起来。",
   },
   {
     icon: Gauge,
     title: "相信数据，也听真实用户怎么说",
     description:
-      "做 Agent 评测花大量精力设计量化指标，但有些体验问题数据看不出来。所以习惯在数据之外找几个真实用户聊聊。数据告诉你是什么，用户告诉你为什么。",
+      "做 Agent 评测花大量精力设计量化指标，但有些体验问题数据看不出来。所以习惯在数据之外找几个真实用户聊聊——数据告诉你是什么，用户告诉你为什么。",
   },
-];
-
-export type Focus = { icon: LucideIcon; title: string; description: string };
-
-export const focusAreas: Focus[] = [
-  {
-    icon: Sparkles,
-    title: "多模态大模型的产品化落地",
-    description:
-      "一个推理能力很强的模型因为数据结构没设计好而效果平庸——从炫技 Demo 到可持续运营的产品之间，到底差了哪几层？",
-  },
-  {
-    icon: Bot,
-    title: "AI Agent 与工作流自动化",
-    description:
-      "Agent 的价值不在于能调用多少工具，而在于能否真正替用户端到端地完成一件事，且比人做更稳定。",
-  },
-  {
-    icon: Database,
-    title: "个人知识管理的 AI 化",
-    description:
-      "大多数人的问题不是没有知识，而是找不回来。AI 能不能让我在几秒内找到几个月前存过的一条笔记？",
-  },
-  {
-    icon: Palette,
-    title: "AI 内容创作工具的演进",
-    description:
-      "好的创作工具不是替创作者做决定，而是尊重他的风格、在他需要的环节提供助力。",
-  },
-];
-
-export const focusThoughts: string[] = [
-  "AI 越强，真正稀缺的越不是执行力，而是提出好问题、定义正确目标、在信息过载中帮团队对齐方向的能力。",
-  "用少量体验换数量级效率提升往往值得，但前提是告知用户边界、预留兜底。难的是找到那条分界线，再用数据反复校准。",
-  "好产品应该越用越懂你——学会你的偏好和工作流，沉淀为可解释、可控制的行为变化，而不是依赖黑盒推荐。",
 ];
 
 export type LifeBlock = {
@@ -513,15 +442,6 @@ export const lifeBlocks: LifeBlock[] = [
   },
 ];
 
-export const closing = {
-  paragraphs: [
-    "我并不是从一开始就规划好一条标准答案式的路径，而是一次次被某些具体问题吸引过去。最初只是觉得 AI 很有趣、写代码有成就感，但越来越被那些卡在现实里的问题抓住——明明有技术方案，却一直没被真正解决的地方。",
-    "文档堆成山却还在群里重复回答同一个问题、流程不复杂却被人肉协作拖慢、工具已上线却没进入日常工作流、模型实验室指标很好却一到真实场景就不稳定——它们分别把我推向了知识管理、RPA 自动化、落地设计和评测体系。",
-    "这些经历让我越来越清楚自己想持续做的事：用 AI 解决真实场景里的真实问题，然后自己动手把它做出来。如果一个问题足够吸引我，我会先写代码验证，再用真实使用来判断方向对不对。",
-  ],
-  quote: "技术明明已经够用了，为什么用户还是用不起来？",
-};
-
 export const videoBreaks = {
   work: {
     src: "https://videos.pexels.com/video-files/3141210/3141210-uhd_3840_2160_25fps.mp4",
@@ -529,13 +449,6 @@ export const videoBreaks = {
       "https://copilot-cn.bytedance.net/api/ide/v1/text_to_image?prompt=abstract%20dark%20data%20stream%20with%20teal%20light%20particles%20flowing%2C%20cinematic%2C%20premium%20tech&image_size=landscape_16_9",
     title: "把复杂的 AI 能力，翻译成真实场景里好用的东西",
     caption: "数据是一种设计语言——你怎么设计它，就决定了模型学到什么样的思维方式。",
-  },
-  life: {
-    src: "https://videos.pexels.com/video-files/2887463/2887463-hd_1920_1080_30fps.mp4",
-    poster:
-      "https://copilot-cn.bytedance.net/api/ide/v1/text_to_image?prompt=cinematic%20mountain%20landscape%20at%20dawn%2C%20misty%2C%20moody%2C%20dark%20teal%20tone%2C%20hiking%20adventure&image_size=landscape_16_9",
-    title: "没有唯一正确的路线，只有适不适合当下的选择",
-    caption: "走得越多越发现——保持对真实世界的感知力，比规划好一条标准路径更重要。",
   },
 };
 
@@ -618,9 +531,7 @@ export const navLinks = [
   { label: "经历", href: "#experience" },
   { label: "学术", href: "#academic" },
   { label: "项目", href: "#projects" },
-  { label: "优势", href: "#strengths" },
-  { label: "做事", href: "#approach" },
-  { label: "关注", href: "#focus" },
+  { label: "优势与做事", href: "#strengths" },
   { label: "生活", href: "#life" },
   { label: "影像", href: "#gallery" },
   { label: "联系方式", href: "#contact" },
